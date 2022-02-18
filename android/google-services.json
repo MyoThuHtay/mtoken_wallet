@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "315536156856",
+    "project_id": "mops-ac848",
+    "storage_bucket": "mops-ac848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315536156856:android:5da23a8c35eee1422e2c4d",
+        "android_client_info": {
+          "package_name": "com.mops.mtoken_wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "315536156856-jcqo3492v31801jif292el7283k2g8ik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mops.mtoken_wallet",
+            "certificate_hash": "c9518835fda55c5e07616c1ab6694d598c5b144f"
+          }
+        },
+        {
+          "client_id": "315536156856-j8ptmm6165u963r988r94kvjmfjnf16s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCorWICN5KUacWTSVetesMiyXrsQ4UsCKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "315536156856-j8ptmm6165u963r988r94kvjmfjnf16s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
