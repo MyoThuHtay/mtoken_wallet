@@ -77,7 +77,7 @@ CREATE TABLE $walletTables (
         where: '${WalletFields.id} = ?', whereArgs: [wallet.id]);
   }
 
-  Future<int> delete(int id) async {
+  Future<int> delete(int? id) async {
     final db = await instance.database;
     return await db
         .delete(walletTables, where: '${WalletFields.id} = ?', whereArgs: [id]);

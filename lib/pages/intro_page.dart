@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtoken_wallet/pages/import_wallet.dart';
 
 import 'intro_page2.dart';
 
@@ -59,7 +60,12 @@ class IntroPage extends StatelessWidget {
                 style: ButtonStyle(
                   backgroundColor:MaterialStateProperty.all(Theme.of(context).scaffoldBackgroundColor),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ImportWallet()),
+                  );
+                },
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   height: MediaQuery.of(context).size.height / 15,

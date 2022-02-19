@@ -8,20 +8,17 @@ import 'package:mtoken_wallet/utilities/wallet_database.dart';
 import '../home.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
 
-class ComfirmMnemonic extends StatefulWidget {
-  const ComfirmMnemonic({Key? key, required this.mne, required this.name})
+class ImportWallet extends StatefulWidget {
+  const ImportWallet({Key? key})
       : super(key: key);
 
-  final String mne;
-  final String name;
-
   @override
-  _ComfirmMnemonicState createState() => _ComfirmMnemonicState();
+  _ImportWalletState createState() => _ImportWalletState();
 }
 
 TextEditingController editor = TextEditingController();
 
-class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
+class _ImportWalletState extends State<ImportWallet> {
   String? pubAddress;
   String? privAddress;
   String? username;
@@ -57,13 +54,13 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
         padding: const EdgeInsets.only(top: 50.0),
         child: Column(
           children: [
-            const Text(
-              'Verify Recovery Phrase',
-              style: TextStyle(fontSize: 20),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            // const Text(
+            //   'Verify Recovery Phrase',
+            //   style: TextStyle(fontSize: 20),
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             const Padding(
               padding: EdgeInsets.only(left: 50.0, right: 50.0),
               child: Text(
@@ -84,7 +81,7 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.only(left: 50.0, top: 30, right: 50),
+                  const EdgeInsets.only(left: 50.0, top: 30, right: 50),
                   child: TextField(
                     controller: editor,
                     decoration: const InputDecoration(
@@ -104,10 +101,10 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
                     Theme.of(context).scaffoldBackgroundColor),
               ),
               onPressed: () async {
-                if (editor.text == widget.mne) {
+
                   WalletAddress service = WalletAddress();
-                  final wallet = widget.name;
-                  final mnemonic = widget.mne;
+                  const wallet = 'My Wallet';
+                  final mnemonic = editor.text;
                   final privateKey = await service.getPrivateKey(mnemonic);
                   final publicKey = await service.getPublicKey(privateKey);
                   final xPud = await service.getXpudKey(mnemonic);
@@ -131,12 +128,12 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
                     ),
                   );
                 }
-              },
+              ,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width / 2,
                 height: MediaQuery.of(context).size.height / 15,
                 child: const Center(
-                  child: Text('Done'),
+                  child: Text('Import'),
                 ),
               ),
             ),

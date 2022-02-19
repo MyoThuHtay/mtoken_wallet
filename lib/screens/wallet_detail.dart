@@ -17,7 +17,7 @@ class _WalletDetailState extends State<WalletDetail> {
     refreshWallets();
   }
 
-  late Wallets wallet;
+  Wallets? wallet;
   bool isLoading = false;
 
   TextEditingController editor = TextEditingController();
@@ -54,7 +54,7 @@ class _WalletDetailState extends State<WalletDetail> {
         actions: [
           IconButton(
               onPressed: () async {
-                await WalletDatabase.instance.delete(widget.wallet.id!);
+                await WalletDatabase.instance.delete(wallet?.id);
                 Navigator.of(context).pop();
               },
               icon: Icon(
@@ -87,7 +87,7 @@ class _WalletDetailState extends State<WalletDetail> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child:Text(wallet.wallets),
+                      child:Text(wallet!.wallets),
 
                     ),
                   ),
@@ -108,7 +108,7 @@ class _WalletDetailState extends State<WalletDetail> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(wallet.public),
+                      child: Text(wallet!.public),
                     ),
                   ),
                   const SizedBox(
@@ -130,7 +130,7 @@ class _WalletDetailState extends State<WalletDetail> {
                       padding: const EdgeInsets.all(10.0),
                       child: TextButton(
                         onPressed: () {
-                          Clipboard.setData(ClipboardData(text: wallet.phrase))
+                          Clipboard.setData(ClipboardData(text: wallet!.phrase))
                               .then((value) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
@@ -139,7 +139,7 @@ class _WalletDetailState extends State<WalletDetail> {
                         child: FittedBox(
                           fit: BoxFit.contain,
                           child: Text(
-                            wallet.phrase,
+                            wallet!.phrase,
                             style: const TextStyle(
                                 color: Colors.grey,
                                 backgroundColor: Colors.white),

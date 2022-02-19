@@ -1,13 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mtoken_wallet/models/wallet_model.dart';
+import 'package:mtoken_wallet/utilities/wallet_database.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../home.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key, required this.wallet}) : super(key: key);
-  final Wallets wallet;
+  const LogIn({Key? key}) : super(key: key);
+
   @override
   _LogInState createState() => _LogInState();
 }
@@ -15,7 +17,9 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   TextEditingController pinText = TextEditingController();
   bool isLogging = false;
+  bool isLoading = false;
   final _user = SharedPreferences.getInstance();
+  List<Wallets>? wallets;
   String pin = '';
   String pin2 = '';
   userLogin() async {
@@ -27,15 +31,28 @@ class _LogInState extends State<LogIn> {
       },
     );
   }
-
+read() async{
+  setState(() {
+    isLoading = true;
+  });
+  wallets = await WalletDatabase.instance.readAllWallets();
+  if(wallets == null) {
+    setState(() {
+      isLoading = false;
+    });
+  }
+  if (kDebugMode) {
+    print(wallets);
+  }
+}
   login() {
-    final wallet = widget.wallet;
+    final wallet = wallets?.first;
     if (pin == pin2) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => MyHomePage(
             wallet: Wallets(
-                isCreated: wallet.isCreated,
+                isCreated: wallet!.isCreated,
                 wallets: wallet.wallets,
                 private: wallet.private,
                 public: wallet.public,
@@ -55,7 +72,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    final wallet = widget.wallet;
+    final wallet = wallets?.first;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SizedBox(
@@ -112,7 +129,7 @@ class _LogInState extends State<LogIn> {
                         MaterialPageRoute(
                           builder: (context) => MyHomePage(
                             wallet: Wallets(
-                                isCreated: wallet.isCreated,
+                                isCreated: wallet!.isCreated,
                                 wallets: wallet.wallets,
                                 private: wallet.private,
                                 public: wallet.public,
