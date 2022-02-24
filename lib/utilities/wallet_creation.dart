@@ -48,7 +48,7 @@ class WalletAddress implements WalletAddressService {
   @override
   Future<EthereumAddress> getPublicKey(String mnemonic) async {
     Chain chain = Chain.seed(hex.encode(utf8.encode(mnemonic)));
-    ExtendedPrivateKey privateKey = chain.forPath("m/44'/60'/0'/0/0") as ExtendedPrivateKey;
+    ExtendedPrivateKey privateKey = chain.forPath("m/44'/60'/0'/0") as ExtendedPrivateKey;
     Credentials private = EthPrivateKey.fromHex(privateKey.privateKeyHex());
     final address = await private.extractAddress();
 
