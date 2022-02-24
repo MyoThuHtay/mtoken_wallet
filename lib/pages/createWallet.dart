@@ -88,7 +88,7 @@ class _CreateWallet extends State<CreateWallet> {
               setState(() {
                 isSelected = true;
               });
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MyHomePage(

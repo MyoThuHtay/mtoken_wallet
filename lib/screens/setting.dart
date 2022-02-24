@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtoken_wallet/models/wallet_model.dart';
 import 'package:mtoken_wallet/pages/createWallet.dart';
-import 'package:mtoken_wallet/pages/create_pin.dart';
+import 'package:mtoken_wallet/pages/read_pin.dart';
 import 'package:mtoken_wallet/theme_provider.dart';
 //import 'package:mtoken_wallet/utilities/wallet_database.dart';
 import 'package:provider/provider.dart';

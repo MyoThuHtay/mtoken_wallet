@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:mtoken_wallet/pages/wallet_mainpage.dart';
@@ -277,11 +277,21 @@ class Recovery extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       });
                     },
-                    child: Text('Copy',style: TextStyle(color:Theme.of(context).scaffoldBackgroundColor, ),),
+                    child: Text(
+                      'Copy',
+                      style: TextStyle(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                      ),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: Text('Show QR',style: TextStyle(color:Theme.of(context).scaffoldBackgroundColor, ),),
+                    child: Text(
+                      'Show QR',
+                      style: TextStyle(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                      ),
+                    ),
                   ),
                 ],
               ),

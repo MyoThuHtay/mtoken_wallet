@@ -33,7 +33,7 @@ CREATE TABLE $walletTables (
   ${WalletFields.isCreated} $boolType, 
   ${WalletFields.wallets} $textType,
   ${WalletFields.private} $textType,
-  ${WalletFields.public} $textType,
+  ${WalletFields.public.toString()} $textType,
   ${WalletFields.phrase} $textType,
   ${WalletFields.xpud} $textType
   )

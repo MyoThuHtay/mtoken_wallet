@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mtoken_wallet/models/wallet_model.dart';
+import 'package:mtoken_wallet/pages/createWallet.dart';
 import 'package:mtoken_wallet/utilities/wallet_database.dart';
 
 class WalletDetail extends StatefulWidget {
@@ -55,7 +56,8 @@ class _WalletDetailState extends State<WalletDetail> {
           IconButton(
               onPressed: () async {
                 await WalletDatabase.instance.delete(wallet?.id);
-                Navigator.of(context).pop();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => const CreateWallet()));
               },
               icon: Icon(
                 Icons.delete,
@@ -108,7 +110,7 @@ class _WalletDetailState extends State<WalletDetail> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(wallet!.public),
+                      child: Text(wallet!.public.toString()),
                     ),
                   ),
                   const SizedBox(

@@ -1,15 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mtoken_wallet/models/wallet_model.dart';
-import 'package:mtoken_wallet/utilities/wallet_database.dart';
+//import 'package:mtoken_wallet/utilities/wallet_database.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../home.dart';
 
 class LogIn extends StatefulWidget {
-  const LogIn({Key? key}) : super(key: key);
-
+  const LogIn({Key? key,required this.wallet}) : super(key: key);
+final Wallets? wallet;
   @override
   _LogInState createState() => _LogInState();
 }
@@ -19,7 +18,7 @@ class _LogInState extends State<LogIn> {
   bool isLogging = false;
   bool isLoading = false;
   final _user = SharedPreferences.getInstance();
-  List<Wallets>? wallets;
+
   String pin = '';
   String pin2 = '';
   userLogin() async {
@@ -31,38 +30,6 @@ class _LogInState extends State<LogIn> {
       },
     );
   }
-read() async{
-  setState(() {
-    isLoading = true;
-  });
-  wallets = await WalletDatabase.instance.readAllWallets();
-  if(wallets == null) {
-    setState(() {
-      isLoading = false;
-    });
-  }
-  if (kDebugMode) {
-    print(wallets);
-  }
-}
-  login() {
-    final wallet = wallets?.first;
-    if (pin == pin2) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => MyHomePage(
-            wallet: Wallets(
-                isCreated: wallet!.isCreated,
-                wallets: wallet.wallets,
-                private: wallet.private,
-                public: wallet.public,
-                phrase: wallet.phrase,
-                xpud: wallet.xpud),
-          ),
-        ),
-      );
-    }
-  }
 
   @override
   void initState() {
@@ -72,7 +39,7 @@ read() async{
 
   @override
   Widget build(BuildContext context) {
-    final wallet = wallets?.first;
+    final wallet = widget.wallet;
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: SizedBox(

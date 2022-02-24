@@ -1,9 +1,11 @@
+//import 'package:dart_bip32_bip44/dart_bip32_bip44.dart';
 import 'package:flutter/material.dart';
 import 'package:mtoken_wallet/models/wallet_model.dart';
 
 //import 'package:mtoken_wallet/utilities/firestore.dart';
 import 'package:mtoken_wallet/utilities/wallet_creation.dart';
 import 'package:mtoken_wallet/utilities/wallet_database.dart';
+//import 'package:trust_wallet_core/flutter_trust_wallet_core.dart';
 
 import '../home.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
@@ -42,6 +44,13 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
 
     await WalletDatabase.instance.create(wallet);
   }
+
+  // HDWallet? wallets;
+  // @override
+  // void initState() {
+  //   FlutterTrustWalletCore.init();
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
@@ -108,13 +117,15 @@ class _ComfirmMnemonicState extends State<ComfirmMnemonic> {
                   WalletAddress service = WalletAddress();
                   final wallet = widget.name;
                   final mnemonic = widget.mne;
+                  //wallets = HDWallet.createWithMnemonic(mnemonic);
+                  //final privateKey2 = wallets?.getKeyForCoin(1);
                   final privateKey = await service.getPrivateKey(mnemonic);
                   final publicKey = await service.getPublicKey(privateKey);
                   final xPud = await service.getXpudKey(mnemonic);
                   //const id = 1;
                   const bool isCreated = true;
-                  addWallet(
-                      isCreated, wallet, privateKey, publicKey, mnemonic, xPud);
+                  addWallet(isCreated, wallet, privateKey, publicKey.toString(),
+                      mnemonic, xPud);
 
                   Navigator.push(
                     context,
